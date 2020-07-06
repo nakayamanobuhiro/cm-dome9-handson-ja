@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Dome9について &mdash; dome9-handson  ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="3. AWSアカウントの追加" href="step01.html" />
+    <link rel="prev" title="1. 前提条件" href="requirement.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> dome9-handson
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirement.html">1. 前提条件</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Dome9について</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#asset-management">2.1. Asset Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#on-boarding">2.1.1. On-Boarding</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#posture-management">2.2. Posture Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compliance-ruleset">2.2.1. Compliance Ruleset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exclusion">2.2.2. Exclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#network-security">2.3. Network Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clarity">2.3.1. Clarity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-groups">2.3.2. Security Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ip-list">2.3.3. IP List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynamic-access">2.3.4. Dynamic Access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tamper-protection">2.3.5. Tamper Protection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#iam-protection">2.4. IAM Protection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iam-safety">2.4.1. -  IAM Safety</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="step01.html">3. AWSアカウントの追加</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step02.html">4. Posture Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step03.html">5. Network Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step04.html">6. IAM Safety</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step05.html">7. リソースの削除</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">8. ハンズオンに含まれないDome9の機能</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">dome9-handson</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>Dome9について</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/overview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dome9">
+<h1><span class="section-number">2. </span>Dome9について<a class="headerlink" href="#dome9" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Dome9は、Amazon Web Service / Microsoft Azure / Google Cloud Platform / Kubernetes向けのCSPM(Cloud Security Posture Managemet)機能を提供するクラウドサービスです。</p>
+<p>クラウドサービスにおける責任共有モデルでは、クラウドサービスを適切に「設定」する責任は利用者にあります。
+しかし、クラウドサービスはその柔軟性によって多数のリソースを手軽に作成することが可能で、故に管理が行き届かず不適切な設定のまま利用されてしまうことがあります。</p>
+<p>CSPMは、クラウドサービスの設定にリスクが含まれていないかを評価したり必要に応じて是正することを支援します。</p>
+<p>このハンズオンでは、以下の機能を体験することができます。</p>
+<ul class="simple">
+<li><p>Asset Management</p>
+<ul>
+<li><p>On-Boarding</p></li>
+</ul>
+</li>
+<li><p>Posture Management</p>
+<ul>
+<li><p>Compliance Ruleset</p></li>
+<li><p>Exclusion</p></li>
+</ul>
+</li>
+<li><p>Network Security</p>
+<ul>
+<li><p>Clarity</p></li>
+<li><p>Security Groups</p></li>
+<li><p>IP List</p></li>
+<li><p>Dynamic Access</p></li>
+<li><p>Tamper Protection</p></li>
+</ul>
+</li>
+<li><p>IAM Protection</p>
+<ul>
+<li><p>IAM Safety</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="asset-management">
+<h2><span class="section-number">2.1. </span>Asset Management<a class="headerlink" href="#asset-management" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="on-boarding">
+<h3><span class="section-number">2.1.1. </span>On-Boarding<a class="headerlink" href="#on-boarding" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>クラウドサービスをDome9に登録します。
+このハンズオンではAWSのアカウントを登録します。
+Dome9の利用者はDome9に対してIAM Roleを利用してアクセス権限の委譲します。
+これによって、Dome9はクラウドサービスの設定を読み込んでリスクの有無を評価やリスクのある状態の是正が可能になります。</p>
+<p>委譲する権限は、読み取りモードと完全保護モード（書き込みモード）の2種類があります。
+設定の評価のみを行う場合にはモニター（読み取り専用）モードを利用します。
+設定の是正も行う場合には完全保護（読み取り/書き込み）モードを利用します。
+このハンズオンでは、完全保護モードを利用します。</p>
+<p>Dome9では複数のクラウドサービス・アカウントを同時に管理・保護することができます。</p>
+</div>
+</div>
+<div class="section" id="posture-management">
+<h2><span class="section-number">2.2. </span>Posture Management<a class="headerlink" href="#posture-management" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="compliance-ruleset">
+<h3><span class="section-number">2.2.1. </span>Compliance Ruleset<a class="headerlink" href="#compliance-ruleset" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Compliance Rulesetは設定に含まれるリスクを評価するルールの集合です。
+SOC2やPCI DSSなどのコンプライアンス標準に準拠したルールセットが提供されています。
+ルールセットは独自に作成することも可能です。</p>
+<p>このハンズオンではDome9が提供するRulesetを利用して手動で評価を実行します。
+また、リスクのある設定を修正後に改めて評価を実行し、リスクが解消されたことを確認します。</p>
+</div>
+<div class="section" id="exclusion">
+<h3><span class="section-number">2.2.2. </span>Exclusion<a class="headerlink" href="#exclusion" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Dome9では指定した条件に該当する評価を除外することができます。</p>
+<p>Rulesetにおいてはリスクがあるとされる状態であっても、個別の要件によってはその設定が妥当である場合があります。
+そのような場合には除外したい条件を指定し、それ以降に条件に該当するリソースに対する・ルールによる評価を除外できます。</p>
+</div>
+</div>
+<div class="section" id="network-security">
+<h2><span class="section-number">2.3. </span>Network Security<a class="headerlink" href="#network-security" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="clarity">
+<h3><span class="section-number">2.3.1. </span>Clarity<a class="headerlink" href="#clarity" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Security Groupによるアクセス制御設定を可視化することができます。
+この機能により、
+Security Groupを利用するリソース（EC2インスタンス・RDSインスタンス・ELBなど）が「任意のIPアドレス / 一部のグローバルIPアドレス / プライベートIPアドレス」のどこからアクセスが可能であるかを可視化します。
+また、VPC内のどのリソースからアクセスが可能であるかも可視化することができます。</p>
+</div>
+<div class="section" id="security-groups">
+<h3><span class="section-number">2.3.2. </span>Security Groups<a class="headerlink" href="#security-groups" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>指定したSecurity Groupの管理をDome9に集約することができます。
+後述する機能を利用して多数のAWSアカウントに対する統制を実現します。</p>
+</div>
+<div class="section" id="ip-list">
+<h3><span class="section-number">2.3.3. </span>IP List<a class="headerlink" href="#ip-list" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Dome9ではIPアドレス / ネットワークアドレスをIP Listというオブジェクトとして定義することができ、Security Groupの設定に利用することができます。</p>
+<p>AWSのマネージメントコンソールでSecurity Groupを設定する場合、各ルールにDescriptionを記述することができますが、設定および管理が煩雑です。
+IP Listを利用してSecurity Groupを設定することで、設定するIPアドレス / ネットワークアドレスに関する説明を集中管理できます。
+また、IP Listを利用して設定した複数のSecurity GroupにIP Listの変更が一括で反映されます。</p>
+</div>
+<div class="section" id="dynamic-access">
+<h3><span class="section-number">2.3.4. </span>Dynamic Access<a class="headerlink" href="#dynamic-access" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Dome9に管理を集約したSecurity Groupに対して一時的なアクセス許可を追加することができます。</p>
+<p>SSH/RDPなどで一時的に管理アクセスを行いたい場合、Security Groupの設定を一時的に変更するつもりで設定がそのままとなり、潜在的なリスクが徐々に増加することがあります。
+Dynamic Accessを利用することで一時的に追加した許可を指定した時間経過後に自動で削除できます。</p>
+</div>
+<div class="section" id="tamper-protection">
+<h3><span class="section-number">2.3.5. </span>Tamper Protection<a class="headerlink" href="#tamper-protection" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Dome9に管理を集約したSecurity Groupに対してAWSのマネージメントコンソールなどから変更した場合に設定をロールバックできます。</p>
+<p>この機能によって、指定したSecurity Groupの変更をDome9に集約することが実現でき、重要なリソースに対する適切な保護をサポートします。</p>
+</div>
+</div>
+<div class="section" id="iam-protection">
+<h2><span class="section-number">2.4. </span>IAM Protection<a class="headerlink" href="#iam-protection" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="iam-safety">
+<h3><span class="section-number">2.4.1. </span>-  IAM Safety<a class="headerlink" href="#iam-safety" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>IAM Safetyを利用することで特権を管理することができます。</p>
+<p>IAM Safetyを有効化する際、特権操作を禁止する制限ポリシーを定義します。
+「特権」は独自に細かく定義することもテンプレートを利用して定義することも可能です。
+IAM Safetyは指定するIAM User / Roleに対して制限ポリシーを割り当てます。</p>
+<p>また、特権操作を許可したいときにはDome9の管理者が一時的に特権操作を許可することができます。
+特権操作の許可は制限ポリシーを一時的にデタッチすることで実現されます。
+許可する時間は指定可能で、制限の再開は自動的に実行されます。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="step01.html" class="btn btn-neutral float-right" title="3. AWSアカウントの追加" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="requirement.html" class="btn btn-neutral float-left" title="1. 前提条件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, classmethod Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

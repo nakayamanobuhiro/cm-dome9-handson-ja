@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6. IAM Safety &mdash; dome9-handson  ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="7. リソースの削除" href="step05.html" />
+    <link rel="prev" title="5. Network Security" href="step03.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> dome9-handson
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirement.html">1. 前提条件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">2. Dome9について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step01.html">3. AWSアカウントの追加</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step02.html">4. Posture Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step03.html">5. Network Security</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. IAM Safety</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">6.1. IAM Safetyの有効化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iam-entity">6.2. 保護するIAM Entityの作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iam-user">6.3. IAM Userの保護（権限を制限）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">6.4. IAM Userの特権昇格</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="step05.html">7. リソースの削除</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">8. ハンズオンに含まれないDome9の機能</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">dome9-handson</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">6. </span>IAM Safety</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/step04.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="iam-safety">
+<h1><span class="section-number">6. </span>IAM Safety<a class="headerlink" href="#iam-safety" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>IAM Safetyを利用することで平常時は特権が制限された状態にしつつ必要な時だけ動的に特権を付与することができます。</p>
+<p>これにより、平常時のオペレーションミスの予防や不正行為の抑止を最小限度の手間で実現することができます。</p>
+<div class="section" id="id1">
+<h2><span class="section-number">6.1. </span>IAM Safetyの有効化<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>IAM Safetyの仕組みを解説します。</p>
+<p>IAM Safetyを利用するにあたり、IAM Groupと特権操作を明示的に拒否するIAM Policyを作成します。
+IAM Safetyで保護されるIAM Userは、普段はこのIAM Groupのメンバーとなっており特権操作が制限されます。
+Dome9で昇格したユーザーは一時的にグループのメンバーから削除され、特権操作が可能になります。
+ただし、IAM Userに当初から特権が付与されている場合に限ります。
+Dome9は明示的に特権操作を禁止することが可能ですが特権操作を付与することはありません。</p>
+<div class="figure align-center">
+<img alt="../_images/IAM_Safety_Diag.png" src="../_images/IAM_Safety_Diag.png" />
+</div>
+<ol class="arabic simple">
+<li><p>[IAM Protection] - [Accounts &amp; IAM Users]を選択します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_001.png" src="../_images/iam_safety_1_001.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>[開始]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_002.png" src="../_images/iam_safety_1_002.png" />
+</div>
+<p>3. Dome9で制限したいアクションを定義します。今回はコンピューティングリソース（EC2やそれに関連が深いサービス群）への操作を制限します。
+[テンプレート]から[Compute]を選択し、[次へ]をクリックします。</p>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_003.png" src="../_images/iam_safety_1_003.png" />
+</div>
+<p>4. IAM SafetyのためのIAM GroupおよびIAM Policyを作成します。
+表示されているIAM Policyはあとで利用します。</p>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_004.png" src="../_images/iam_safety_1_004.png" />
+</div>
+<ol class="arabic simple" start="5">
+<li><p>AWSのマネージメントコンソールにログインし、[サービス] - [IAM]を選択します。</p></li>
+<li><p>[ポリシー] - [ポリシーの作成]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_005.png" src="../_images/iam_safety_1_005.png" />
+</div>
+<ol class="arabic simple" start="7">
+<li><p>[JSON]のタブをクリックし、Dome9のコンソールで表示されているIAM Policyをコピーして貼り付けます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_006.png" src="../_images/iam_safety_1_006.png" />
+</div>
+<ol class="arabic simple" start="8">
+<li><p>ポリシー名に[Dome9-Restricted-Policy]と入力し、[ポリシーの作成]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_007.png" src="../_images/iam_safety_1_007.png" />
+</div>
+<ol class="arabic simple" start="9">
+<li><p>次にIAM Groupを作成します。[グループ] - [新しいグループの作成]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_008.png" src="../_images/iam_safety_1_008.png" />
+</div>
+<ol class="arabic simple" start="10">
+<li><p>グループ名に[Dome9-Restricted-Group]と入力し、次に進みます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_009.png" src="../_images/iam_safety_1_009.png" />
+</div>
+<ol class="arabic simple" start="11">
+<li><p>作成したIAM Policyを選択し、次に進みます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_010.png" src="../_images/iam_safety_1_010.png" />
+</div>
+<ol class="arabic simple" start="12">
+<li><p>内容を確認し、IAM Groupの作成を完了します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_011.png" src="../_images/iam_safety_1_011.png" />
+</div>
+<ol class="arabic simple" start="13">
+<li><p>Dome9に設定するIAM PolicyおよびIAM GroupのARNを確認します。[ポリシー]を選択し、[Dome9-Restricted-Policy]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_012.png" src="../_images/iam_safety_1_012.png" />
+</div>
+<ol class="arabic simple" start="14">
+<li><p>[ポリシーARN]をコピーします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_013.png" src="../_images/iam_safety_1_013.png" />
+</div>
+<ol class="arabic simple" start="15">
+<li><p>Dome9のコンソールに戻り、[ポリシーARN]にコピーしたARNを貼り付けます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_014.png" src="../_images/iam_safety_1_014.png" />
+</div>
+<ol class="arabic simple" start="16">
+<li><p>[グループ]を選択し、[Dome9-Restricted-Group]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_015.png" src="../_images/iam_safety_1_015.png" />
+</div>
+<ol class="arabic simple" start="17">
+<li><p>[グループのARN]をコピーします</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_016.png" src="../_images/iam_safety_1_016.png" />
+</div>
+<ol class="arabic simple" start="18">
+<li><p>Dome9のコンソールに戻り、[グループARN]にコピーしたARNを貼り付けます。次に進みます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_017.png" src="../_images/iam_safety_1_017.png" />
+</div>
+<ol class="arabic simple" start="19">
+<li><p>IAM Safetyを利用するAWSアカウントを選択し、次に進みます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_018.png" src="../_images/iam_safety_1_018.png" />
+</div>
+<ol class="arabic simple" start="20">
+<li><p>Dome9に対してIAM UserやIAM Group等への操作を許可するためにIAM Policyの作成およびIAM Roleへアタッチを行います。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_019.png" src="../_images/iam_safety_1_019.png" />
+</div>
+<ol class="arabic simple" start="21">
+<li><p>[ポリシー] - [ポリシーの作成]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_020.png" src="../_images/iam_safety_1_020.png" />
+</div>
+<ol class="arabic simple" start="22">
+<li><p>[JSON]のタブをクリックし、Dome9のコンソールで表示されているIAM Policyをコピーして貼り付けます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_021.png" src="../_images/iam_safety_1_021.png" />
+</div>
+<ol class="arabic simple" start="23">
+<li><p>ポリシー名に[Dome9-IAM-Policy]と入力し、[ポリシーの作成]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_022.png" src="../_images/iam_safety_1_022.png" />
+</div>
+<ol class="arabic simple" start="24">
+<li><p>[ロール]を選択し、[Dome9-Connect]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_023.png" src="../_images/iam_safety_1_023.png" />
+</div>
+<ol class="arabic simple" start="25">
+<li><p>[ポリシーをアタッチします]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_024.png" src="../_images/iam_safety_1_024.png" />
+</div>
+<ol class="arabic simple" start="26">
+<li><p>[Dome9-IAM-Policy]を選択し、[ポリシーのアタッチ]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_025.png" src="../_images/iam_safety_1_025.png" />
+</div>
+<ol class="arabic simple" start="27">
+<li><p>Dome9のコンソールに戻り設定を完了します。接続に成功すると以下の画面が表示されます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_026.png" src="../_images/iam_safety_1_026.png" />
+</div>
+</div>
+<div class="section" id="iam-entity">
+<h2><span class="section-number">6.2. </span>保護するIAM Entityの作成<a class="headerlink" href="#iam-entity" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>今回は、IAM Userを作成し、そのIAM UserをIAM Safetyで管理します。</p>
+<ol class="arabic simple">
+<li><p>[ユーザー] - [ユーザーを追加]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_027.png" src="../_images/iam_safety_1_027.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>以下の通り設定を実施します。設定したら、[次のステップ:アクセス権限]をクリックします。</p></li>
+</ol>
+<ul class="simple">
+<li><p>任意のユーザー名を入力</p></li>
+<li><p>[AWSマネジメントコンソールへのアクセス]をチェック</p></li>
+<li><p>[パスワードリセットが必要]のチェックを外す（作業手順を減らすためにチェックを外します）</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_028.png" src="../_images/iam_safety_1_028.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>[既存のポリシーを直接アタッチ]を選択し、[AdministratorAccess]を選択して[次のステップ:タグ]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_029.png" src="../_images/iam_safety_1_029.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>タグを設定せず次に進みます。</p></li>
+<li><p>[ユーザーの作成]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_030.png" src="../_images/iam_safety_1_030.png" />
+</div>
+<ol class="arabic simple" start="6">
+<li><p>以下の情報をメモします。メモ帳などにコピーしてください。もしくは、[.csvのダウンロード]をクリックします。ダウンロードできるファイルに以下の情報が含まれます。</p></li>
+</ol>
+<ul class="simple">
+<li><p>サインインURL</p></li>
+<li><p>ユーザー</p></li>
+<li><p>パスワード</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_031.png" src="../_images/iam_safety_1_031.png" />
+</div>
+<ol class="arabic simple" start="7">
+<li><p>作成したIAM UserでAWSのマネージメントコンソールにログインします。別のIAM Userでログインしている場合には一度ログアウトし、先ほどメモしたサインインURLにアクセスします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_032.png" src="../_images/iam_safety_1_032.png" />
+</div>
+<ol class="arabic simple" start="8">
+<li><p>最初に作成したEC2インスタンスを利用して動作を確認します。[サービス] - [EC2]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_033.png" src="../_images/iam_safety_1_033.png" />
+</div>
+<ol class="arabic simple" start="9">
+<li><p>[インスタンス]を選択し、起動しているEC2インスタンスを選択して[アクション] - [インスタンスの状態] - [停止]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_034.png" src="../_images/iam_safety_1_034.png" />
+</div>
+<p>10．停止したことを確認したら、起動します。[アクション] - [インスタンスの状態] - [開始]をクリックします。</p>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_034_2.png" src="../_images/iam_safety_1_034_2.png" />
+</div>
+</div>
+<div class="section" id="iam-user">
+<h2><span class="section-number">6.3. </span>IAM Userの保護（権限を制限）<a class="headerlink" href="#iam-user" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>作成したIAM Safetyで管理し、特権の行使を制限します。</p>
+<ol class="arabic simple">
+<li><p>[IAM Protection] - [Accounts &amp; IAM Users]を選択します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_001.png" src="../_images/iam_safety_1_001.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>作成したIAM Userを選択し、[すべて保護]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_035.png" src="../_images/iam_safety_1_035.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_035_1.png" src="../_images/iam_safety_1_035_1.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_035_2.png" src="../_images/iam_safety_1_035_2.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>ステータスが[Protected]になったことを確認します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_036.png" src="../_images/iam_safety_1_036.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>動作を確認します。[インスタンス]を選択し、起動しているEC2インスタンスを選択して[アクション] - [インスタンスの状態] - [停止]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_037.png" src="../_images/iam_safety_1_037.png" />
+</div>
+<ol class="arabic simple" start="5">
+<li><p>[停止する]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_038.png" src="../_images/iam_safety_1_038.png" />
+</div>
+<ol class="arabic simple" start="6">
+<li><p>権限を制限されているためインスタンスができません（期待する動作です）。[キャンセル]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_039.png" src="../_images/iam_safety_1_039.png" />
+</div>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">6.4. </span>IAM Userの特権昇格<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>一時的に制限を緩和して特権へ昇格させます。</p>
+<ol class="arabic simple">
+<li><p>保護したIAM Userに対して[ELEVATE]をクリックします。成功した場合、その旨が記載されたメッセージが上部に表示されます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_040.png" src="../_images/iam_safety_1_040.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>特権に昇格できたことを確認します。[Active elevations]を開きます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_041.png" src="../_images/iam_safety_1_041.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>昇格したIAM Userが存在することを確認します。[ELEVATE]をクリックした場合には昇格の期間が15分間であることが確認できます。[Expiration]を確認してください。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_042.png" src="../_images/iam_safety_1_042.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>動作を確認します。[インスタンス]を選択し、起動しているEC2インスタンスを選択して[アクション] - [インスタンスの状態] - [停止]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_043.png" src="../_images/iam_safety_1_043.png" />
+</div>
+<ol class="arabic simple" start="5">
+<li><p>[停止する]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_044.png" src="../_images/iam_safety_1_044.png" />
+</div>
+<ol class="arabic simple" start="6">
+<li><p>インスタンスの停止処理が開始されたことを確認します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/iam_safety_1_045.png" src="../_images/iam_safety_1_045.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="step05.html" class="btn btn-neutral float-right" title="7. リソースの削除" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="step03.html" class="btn btn-neutral float-left" title="5. Network Security" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, classmethod Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

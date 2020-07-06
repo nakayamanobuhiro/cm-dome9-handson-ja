@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>8. ハンズオンに含まれないDome9の機能 &mdash; dome9-handson  ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="prev" title="7. リソースの削除" href="step05.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> dome9-handson
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirement.html">1. 前提条件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">2. Dome9について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step01.html">3. AWSアカウントの追加</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step02.html">4. Posture Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step03.html">5. Network Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step04.html">6. IAM Safety</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step05.html">7. リソースの削除</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. ハンズオンに含まれないDome9の機能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#asset-management">8.1. Asset Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#azure-gcp-kubernetes">8.1.1. Azure / GCP / Kubernetes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#posture-management">8.2. Posture Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#remediation">8.2.1. Remediation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compliance-policies">8.2.2. Compliance Policies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#network-security">8.3. Network Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#flow-logs">8.3.1. Flow Logs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#log-ic">8.4. Log.ic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iam-protection">8.5. IAM Protection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iam-report">8.5.1. IAM Report</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">dome9-handson</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">8. </span>ハンズオンに含まれないDome9の機能</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/appendix.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dome9">
+<h1><span class="section-number">8. </span>ハンズオンに含まれないDome9の機能<a class="headerlink" href="#dome9" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Dome9には上記の機能以外に以下のような機能を提供しています。</p>
+<ul class="simple">
+<li><p>Asset Management</p>
+<ul>
+<li><p>Azure / GCP / Kubernetes</p></li>
+</ul>
+</li>
+<li><p>Posture Management</p>
+<ul>
+<li><p>Remediation</p></li>
+<li><p>Compliance Policies</p></li>
+</ul>
+</li>
+<li><p>Network Security</p>
+<ul>
+<li><p>Flow Logs</p></li>
+</ul>
+</li>
+<li><p>Log.ic</p></li>
+<li><p>IAM Protection</p>
+<ul>
+<li><p>IAM Report</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="asset-management">
+<h2><span class="section-number">8.1. </span>Asset Management<a class="headerlink" href="#asset-management" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="azure-gcp-kubernetes">
+<h3><span class="section-number">8.1.1. </span>Azure / GCP / Kubernetes<a class="headerlink" href="#azure-gcp-kubernetes" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>AWS以外にも、Azure / GCP / k8sもDome9で保護することができます。
+ただし、利用できる機能はクラウドサービスによって異なります。</p>
+</div>
+</div>
+<div class="section" id="posture-management">
+<h2><span class="section-number">8.2. </span>Posture Management<a class="headerlink" href="#posture-management" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="remediation">
+<h3><span class="section-number">8.2.1. </span>Remediation<a class="headerlink" href="#remediation" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Compliance Rulesetでリスクがあると評価されたリソースに対してその是正を自動的に行うことが可能です。</p>
+<p><a class="reference external" href="https://dev.classmethod.jp/etc/dome9-remediation/">https://dev.classmethod.jp/etc/dome9-remediation/</a></p>
+</div>
+<div class="section" id="compliance-policies">
+<h3><span class="section-number">8.2.2. </span>Compliance Policies<a class="headerlink" href="#compliance-policies" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>登録したクラウドサービスに対して指定したCompliance Rulesetによる評価を自動的に実行することができます。
+また、評価結果を利用者に通知することができます。</p>
+<p><a class="reference external" href="https://dev.classmethod.jp/cloud/dome9-continuous-compliance/">https://dev.classmethod.jp/cloud/dome9-continuous-compliance/</a></p>
+<p>この継続的な評価は特定のクラウドサービスのアカウントに対して実行することもできますし、アカウントをグループ化したOrganization Unitの単位で適用することも可能です。</p>
+</div>
+</div>
+<div class="section" id="network-security">
+<h2><span class="section-number">8.3. </span>Network Security<a class="headerlink" href="#network-security" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="flow-logs">
+<h3><span class="section-number">8.3.1. </span>Flow Logs<a class="headerlink" href="#flow-logs" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>VPC FlowLogsをDome9で集約し、フィルタリング等を行うことができます。</p>
+<p>この機能はインシデント調査などに利用することができます。</p>
+</div>
+</div>
+<div class="section" id="log-ic">
+<h2><span class="section-number">8.4. </span>Log.ic<a class="headerlink" href="#log-ic" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>クラウドサービスに対する管理アクティビティ（CloudTrail）およびネットワークアクティビティ（VPC FlowLogs）の可視化と分析を行うことができます。
+Log.icはCheckpointの提供する脅威インテリジェンスを連携し、問題のあるアクティビティを検出することができます。
+また、事前定義されたRuleSetを利用して継続的にアクティビティを評価することも可能です。</p>
+<p><a class="reference external" href="https://dev.classmethod.jp/cloud/aws/dome9-log-ic-introduction/">https://dev.classmethod.jp/cloud/aws/dome9-log-ic-introduction/</a></p>
+</div>
+<div class="section" id="iam-protection">
+<h2><span class="section-number">8.5. </span>IAM Protection<a class="headerlink" href="#iam-protection" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="iam-report">
+<h3><span class="section-number">8.5.1. </span>IAM Report<a class="headerlink" href="#iam-report" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>IAM UserやIAM Roleに対して付与されている権限の分析や認証情報に関するレポートを提供します。
+IAM Reportを利用することで、特定のアクションが許可されたIAMのEntityを特定したり、不適切な認証設定のIAM Entityを特定することが可能です。</p>
+<p><a class="reference external" href="https://dev.classmethod.jp/cloud/aws/dome9-iam-report/">https://dev.classmethod.jp/cloud/aws/dome9-iam-report/</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="step05.html" class="btn btn-neutral float-left" title="7. リソースの削除" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, classmethod Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

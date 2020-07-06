@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Dome9 ハンズオン手順書 &mdash; dome9-handson  ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="1. 前提条件" href="contents/requirement.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> dome9-handson
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">目次:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contents/requirement.html">1. 前提条件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/overview.html">2. Dome9について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step01.html">3. AWSアカウントの追加</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step02.html">4. Posture Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step03.html">5. Network Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step04.html">6. IAM Safety</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step05.html">7. リソースの削除</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/appendix.html">8. ハンズオンに含まれないDome9の機能</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">dome9-handson</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Dome9 ハンズオン手順書</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dome9">
+<h1>Dome9 ハンズオン手順書<a class="headerlink" href="#dome9" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">目次:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contents/requirement.html">1. 前提条件</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contents/requirement.html#id2">1.1. 提供するリソース</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/requirement.html#id3">1.2. ご用意頂くリソース</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/requirement.html#id4">1.3. 前提知識</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/requirement.html#id5">1.4. 免責事項</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contents/overview.html">2. Dome9について</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contents/overview.html#asset-management">2.1. Asset Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/overview.html#posture-management">2.2. Posture Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/overview.html#network-security">2.3. Network Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/overview.html#iam-protection">2.4. IAM Protection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step01.html">3. AWSアカウントの追加</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contents/step01.html#id2">3.1. 評価対象のリソースを作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step01.html#id3">3.2. AWSアカウントの追加</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step02.html">4. Posture Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contents/step02.html#id1">4.1. リソースの評価</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step02.html#id2">4.2. 評価対象のリソースの修正</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step02.html#id3">4.3. リソースの再評価</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step02.html#id4">4.4. 【参考】その他のルール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step02.html#id5">4.5. 評価の除外</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step03.html">5. Network Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contents/step03.html#id1">5.1. ネットワークの可視化*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step03.html#security-groupip">5.2. Security Groupで利用するIPアドレスの管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step03.html#dynamic-access">5.3. Dynamic Accessによる一時的なアクセス許可</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step03.html#full-protectionsecurity-group">5.4. Full ProtectionによるSecurity Groupの保護</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step04.html">6. IAM Safety</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contents/step04.html#id1">6.1. IAM Safetyの有効化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step04.html#iam-entity">6.2. 保護するIAM Entityの作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step04.html#iam-user">6.3. IAM Userの保護（権限を制限）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step04.html#id2">6.4. IAM Userの特権昇格</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contents/step05.html">7. リソースの削除</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contents/step05.html#cloudformation-stack">7.1. CloudFormation Stackの削除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step05.html#optional-iam-safety">7.2. (Optional)IAM Safetyの無効化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step05.html#optional-aws">7.3. (Optional)AWSアカウントの登録解除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step05.html#optional-iam-user">7.4. (Optional)IAM Userの削除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step05.html#optional-iam-group">7.5. (Optional)IAM Groupの削除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step05.html#optional-iam-role">7.6. (Optional)IAM Roleの削除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/step05.html#optional-iam-policy">7.7. (Optional)IAM Policyの削除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contents/appendix.html">8. ハンズオンに含まれないDome9の機能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contents/appendix.html#asset-management">8.1. Asset Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/appendix.html#posture-management">8.2. Posture Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/appendix.html#network-security">8.3. Network Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/appendix.html#log-ic">8.4. Log.ic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contents/appendix.html#iam-protection">8.5. IAM Protection</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contents/requirement.html" class="btn btn-neutral float-right" title="1. 前提条件" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, classmethod Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

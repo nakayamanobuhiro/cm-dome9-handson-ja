@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. Posture Management &mdash; dome9-handson  ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="5. Network Security" href="step03.html" />
+    <link rel="prev" title="3. AWSアカウントの追加" href="step01.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> dome9-handson
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirement.html">1. 前提条件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">2. Dome9について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step01.html">3. AWSアカウントの追加</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Posture Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">4.1. リソースの評価</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.2. 評価対象のリソースの修正</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#instance-with-administrative-service-ssh-tcp-22-is-too-exposed-to-the-public-internet">4.2.1. &quot;Instance with administrative service: SSH (TCP:22) is too exposed to the public internet&quot;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instance-with-administrative-service-ssh-tcp-22-is-exposed-to-a-wide-network-scope">4.2.2. &quot;Instance with administrative service: SSH (TCP:22) is exposed to a wide network scope&quot;</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">4.3. リソースの再評価</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">4.4. 【参考】その他のルール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ensure-iam-password-policy-require-at-least-one-symbol">4.4.1. &quot;Ensure IAM password policy require at least one symbol&quot;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ensure-iam-password-policy-expires-passwords-within-90-days-or-less">4.4.2. &quot;Ensure IAM password policy expires passwords within 90 days or less&quot;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-encrypted-rds-storage">4.4.3. &quot;Use Encrypted RDS storage&quot;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ensure-a-log-metric-filter-and-alarm-exist-for-unauthorized-api-calls">4.4.4. &quot;Ensure a log metric filter and alarm exist for unauthorized API calls&quot;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ensure-vpc-flow-logging-is-enabled-in-all-vpcs">4.4.5. &quot;Ensure VPC flow logging is enabled in all VPCs&quot;</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">4.5. 評価の除外</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="step03.html">5. Network Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step04.html">6. IAM Safety</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step05.html">7. リソースの削除</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">8. ハンズオンに含まれないDome9の機能</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">dome9-handson</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">4. </span>Posture Management</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/step02.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="posture-management">
+<h1><span class="section-number">4. </span>Posture Management<a class="headerlink" href="#posture-management" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Posture Managementでは、クラウドプラットフォーム上の状態・設定を走査およびリスクの検出を行うことができます。
+また、継続的に検出を行うことも可能です。</p>
+<div class="section" id="id1">
+<h2><span class="section-number">4.1. </span>リソースの評価<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>最初に作成したリソースを評価します。
+今回は、[AWS Dome9 CheckUp]のRulesetを利用します。</p>
+<ol class="arabic simple">
+<li><p>[Posture Management] - [Compliance Rulesets]を選択します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dome9_3_001.png" src="../_images/dome9_3_001.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>[AWS Dome9 CheckUp] - [評価を実行]をクリックします。見つけられない場合にはRuleset名をフィルターのテキストボックスに入力して絞り込んでください。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dome9_3_002.png" src="../_images/dome9_3_002.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>評価対象を選択し、[RUN]をクリックします。見つけられない場合にはRuleset名をフィルターのテキストボックスに入力して絞り込んでください。</p></li>
+</ol>
+<ul class="simple">
+<li><p>[Cloud Account]: Dome9に追加したAWSアカウント</p></li>
+<li><p>[Region]: Tokyo（評価用のリソースを作成したリージョン）</p></li>
+<li><p>[VPC]: CloudFormationで作成したVPC</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../_images/dome9_3_003.png" src="../_images/dome9_3_003.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>評価結果を確認します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dome9_3_004.png" src="../_images/dome9_3_004.png" />
+</div>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">4.2. </span>評価対象のリソースの修正<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>修正の対象を特定し、修正と再評価を行います。</p>
+<ol class="arabic simple">
+<li><p>以下の条件で絞り込みを行います。</p></li>
+</ol>
+<ul class="simple">
+<li><p>Rules passed/failed: failed</p></li>
+<li><p>Types: Instance</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../_images/dome9_4_001.png" src="../_images/dome9_4_001.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/dome9_4_002.png" src="../_images/dome9_4_002.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/dome9_4_003.png" src="../_images/dome9_4_003.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/dome9_4_004.png" src="../_images/dome9_4_004.png" />
+</div>
+<p>フィルタリングした結果、以下の2件のルールが検出されます。</p>
+<div class="figure align-center">
+<img alt="../_images/dome9_4_005.png" src="../_images/dome9_4_005.png" />
+</div>
+<p>評価ルールの詳細は以下のドキュメントを参照してください。</p>
+<ul class="simple">
+<li><p>Instance with administrative service: SSH (<a class="reference external" href="TCP:22">TCP:22</a>) is too exposed to the public internet</p>
+<ul>
+<li><p><a class="reference external" href="https://gsl.dome9.com/D9.AWS.NET.AG4.Instance.22.TCP.html">https://gsl.dome9.com/D9.AWS.NET.AG4.Instance.22.TCP.html</a></p></li>
+</ul>
+</li>
+<li><p>Instance with administrative service: SSH (<a class="reference external" href="TCP:22">TCP:22</a>) is exposed to a wide network scope</p>
+<ul>
+<li><p><a class="reference external" href="https://gsl.dome9.com/D9.AWS.NET.AG5.Instance.22.TCP.html">https://gsl.dome9.com/D9.AWS.NET.AG5.Instance.22.TCP.html</a></p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="instance-with-administrative-service-ssh-tcp-22-is-too-exposed-to-the-public-internet">
+<h3><span class="section-number">4.2.1. </span>&quot;Instance with administrative service: SSH (<a class="reference external" href="TCP:22">TCP:22</a>) is too exposed to the public internet&quot;<a class="headerlink" href="#instance-with-administrative-service-ssh-tcp-22-is-too-exposed-to-the-public-internet" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ルール&quot;Instance with administrative service: SSH (<a class="reference external" href="TCP:22">TCP:22</a>) is too exposed to the public internet&quot;による評価結果を確認し、問題点を是正します。</p>
+<p>1.　評価結果を展開し、内容を確認します。</p>
+<div class="figure align-center">
+<img alt="../_images/dome9_5_001.png" src="../_images/dome9_5_001.png" />
+</div>
+<p>このルールによって、SSHでのアクセスをインターネット上の多くのホストに許可しているEC2インスタンスが不合格とされます。</p>
+<p>不合格とされたEC2インスタンスのIDをクリックします。</p>
+<div class="figure align-center">
+<img alt="../_images/dome9_5_002.png" src="../_images/dome9_5_002.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>問題のあるインスタンスの設定を確認します。</p></li>
+</ol>
+<p>Dome9のAsset Management機能を用いることで、保護されたリソースの設定を参照することができます。
+以下の画面(Network Security Policies)では、ネットワークアクセス制御に関する設定（Security GroupのInbound/OutboundおよびNACLのInbound/Outbound）を1つの画面で確認することができます。
+この画面から、任意のIPアドレスからSSHでのアクセスを許可しているSecurity Groupが存在していることが分かります。</p>
+<p>Security Groupの名前をクリックします。</p>
+<div class="figure align-center">
+<img alt="../_images/dome9_5_003.png" src="../_images/dome9_5_003.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>任意のIPアドレスからSSHでのアクセスを許可しているルールを削除します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dome9_5_004.png" src="../_images/dome9_5_004.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/dome9_5_005.png" src="../_images/dome9_5_005.png" />
+</div>
+</div>
+<div class="section" id="instance-with-administrative-service-ssh-tcp-22-is-exposed-to-a-wide-network-scope">
+<h3><span class="section-number">4.2.2. </span>&quot;Instance with administrative service: SSH (<a class="reference external" href="TCP:22">TCP:22</a>) is exposed to a wide network scope&quot;<a class="headerlink" href="#instance-with-administrative-service-ssh-tcp-22-is-exposed-to-a-wide-network-scope" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ルール&quot;Instance with administrative service: SSH (<a class="reference external" href="TCP:22">TCP:22</a>) is exposed to a wide network scope&quot;による評価結果を確認し、問題点を是正します。</p>
+<p>このルールによって、SSHでのアクセスを多数のホストに許可しているEC2インスタンスが不合格とされます。</p>
+<p>このルールで指摘されている問題は、&quot;Instance with administrative service: SSH (<a class="reference external" href="TCP:22">TCP:22</a>) is too exposed to the public internet&quot;に対する修正によって同時に解消されるため、追加作業は不要です。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">4.3. </span>リソースの再評価<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>修正完了後、同じRulesetで評価を実行します。</p>
+<p>修正が評価結果に反映されるために10-20分程度必要とする場合があります。
+期待する結果にならなかった場合、しばらく待ってから評価を再実行してください。</p>
+<div class="figure align-center">
+<img alt="../_images/dome9_5_006.png" src="../_images/dome9_5_006.png" />
+</div>
+<p>AWSリソースの評価と修正は以上です。</p>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">4.4. </span>【参考】その他のルール<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>これ以外に[AWS Dome9 CheckUp]に含まれるルールの一部を紹介します。</p>
+<div class="section" id="ensure-iam-password-policy-require-at-least-one-symbol">
+<h3><span class="section-number">4.4.1. </span>&quot;Ensure IAM password policy require at least one symbol&quot;<a class="headerlink" href="#ensure-iam-password-policy-require-at-least-one-symbol" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li><p>Ensure IAM password policy require at least one symbol</p>
+<ul>
+<li><p><a class="reference external" href="https://gsl.dome9.com/D9.AWS.IAM.10.html">https://gsl.dome9.com/D9.AWS.IAM.10.html</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ensure-iam-password-policy-expires-passwords-within-90-days-or-less">
+<h3><span class="section-number">4.4.2. </span>&quot;Ensure IAM password policy expires passwords within 90 days or less&quot;<a class="headerlink" href="#ensure-iam-password-policy-expires-passwords-within-90-days-or-less" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li><p>Ensure IAM password policy expires passwords within 90 days or less</p>
+<ul>
+<li><p><a class="reference external" href="https://gsl.dome9.com/D9.AWS.IAM.15.html">https://gsl.dome9.com/D9.AWS.IAM.15.html</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="use-encrypted-rds-storage">
+<h3><span class="section-number">4.4.3. </span>&quot;Use Encrypted RDS storage&quot;<a class="headerlink" href="#use-encrypted-rds-storage" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li><p>Use Encrypted RDS storage</p>
+<ul>
+<li><p><a class="reference external" href="https://gsl.dome9.com/D9.AWS.CRY.05.html">https://gsl.dome9.com/D9.AWS.CRY.05.html</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ensure-a-log-metric-filter-and-alarm-exist-for-unauthorized-api-calls">
+<h3><span class="section-number">4.4.4. </span>&quot;Ensure a log metric filter and alarm exist for unauthorized API calls&quot;<a class="headerlink" href="#ensure-a-log-metric-filter-and-alarm-exist-for-unauthorized-api-calls" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li><p>Ensure a log metric filter and alarm exist for unauthorized API calls</p>
+<ul>
+<li><p><a class="reference external" href="https://gsl.dome9.com/D9.AWS.MON.01.html">https://gsl.dome9.com/D9.AWS.MON.01.html</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ensure-vpc-flow-logging-is-enabled-in-all-vpcs">
+<h3><span class="section-number">4.4.5. </span>&quot;Ensure VPC flow logging is enabled in all VPCs&quot;<a class="headerlink" href="#ensure-vpc-flow-logging-is-enabled-in-all-vpcs" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li><p>Ensure VPC flow logging is enabled in all VPCs</p>
+<ul>
+<li><p><a class="reference external" href="https://gsl.dome9.com/D9.AWS.NET.03.html">https://gsl.dome9.com/D9.AWS.NET.03.html</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><span class="section-number">4.5. </span>評価の除外<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Rulesetで定義した基準を全てのリソースが準拠していることが一般的には望ましいですが、業務上の要件等で満たせない・満たす必要がないケースがあります。
+Dome9ではそのようなケースを例外として登録し評価対象から除外することができます。</p>
+<ol class="arabic simple">
+<li><p>[Posture Management] - [Assesment History]を選択します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/exclude_001.png" src="../_images/exclude_001.png" />
+</div>
+<p>2．Ruleset [AWS Dome9 Checkup] で評価した最新の評価結果を開きます。</p>
+<div class="figure align-center">
+<img alt="../_images/exclude_002.png" src="../_images/exclude_002.png" />
+</div>
+<p>3. &quot;Ensure IAM password policy expires passwords within 90 days or less&quot;の評価結果を確認します。
+ルール名で検索します。
+新規作成したばかりのAWSアカウントの場合、不合格になっているはずです。
+今回はこのルールによる評価を除外します。
+評価結果を[展開]します。</p>
+<div class="figure align-center">
+<img alt="../_images/exclude_003.png" src="../_images/exclude_003.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>[Actions]から、旗のアイコンをクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/exclude_004.png" src="../_images/exclude_004.png" />
+</div>
+<p>5. 新しい除外設定を作成します。
+評価結果から画面遷移した場合、除外の対象となるAWSアカウントおよびエンティティは設定済です。
+どのルールを除外するか（Exclude by Rule）は設定されていないので、この設定を追加します。</p>
+<div class="figure align-center">
+<img alt="../_images/exclude_005.png" src="../_images/exclude_005.png" />
+</div>
+<ol class="arabic simple" start="6">
+<li><p>除外するルールを選択およびコメントを入力し、[SAVE]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/exclude_006.png" src="../_images/exclude_006.png" />
+</div>
+<p>7. 除外設定が作成されたことを確認します。
+[Posture Management] - [Exclusions]を選択します。</p>
+<div class="figure align-center">
+<img alt="../_images/exclude_007.png" src="../_images/exclude_007.png" />
+</div>
+<p>8. 実際に評価から除外されたか確認します。
+[Posture Management] - [Complient Rulesets]を選択し、[AWS Dome9 Checkup]で[評価を実行]します。</p>
+<div class="figure align-center">
+<img alt="../_images/exclude_008.png" src="../_images/exclude_008.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/exclude_009.png" src="../_images/exclude_009.png" />
+</div>
+<p>9. ルール名で検索すると、合格として表示されます。
+[SHOW EXCLUSIONS]を有効にすると、評価が除外されていることが確認できます。</p>
+<div class="figure align-center">
+<img alt="../_images/exclude_010.png" src="../_images/exclude_010.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/exclude_011.png" src="../_images/exclude_011.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="step03.html" class="btn btn-neutral float-right" title="5. Network Security" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="step01.html" class="btn btn-neutral float-left" title="3. AWSアカウントの追加" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, classmethod Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

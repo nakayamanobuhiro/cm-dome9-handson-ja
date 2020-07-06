@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5. Network Security &mdash; dome9-handson  ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="6. IAM Safety" href="step04.html" />
+    <link rel="prev" title="4. Posture Management" href="step02.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> dome9-handson
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirement.html">1. 前提条件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">2. Dome9について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step01.html">3. AWSアカウントの追加</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step02.html">4. Posture Management</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Network Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">5.1. ネットワークの可視化*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-groupip">5.2. Security Groupで利用するIPアドレスの管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dynamic-access">5.3. Dynamic Accessによる一時的なアクセス許可</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#full-protectionsecurity-group">5.4. Full ProtectionによるSecurity Groupの保護</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="step04.html">6. IAM Safety</a></li>
+<li class="toctree-l1"><a class="reference internal" href="step05.html">7. リソースの削除</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">8. ハンズオンに含まれないDome9の機能</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">dome9-handson</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">5. </span>Network Security</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/step03.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="network-security">
+<h1><span class="section-number">5. </span>Network Security<a class="headerlink" href="#network-security" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Network Securityでは、多数のクラウドアカウントにおいてネットワークアクセス制御の設定を効率的に管理することができます。</p>
+<p>具体的には、意図しない変更の予防や時限的なアクセス許可を容易に実現できます。</p>
+<div class="section" id="id1">
+<h2><span class="section-number">5.1. </span>ネットワークの可視化*<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ul class="simple">
+<li><p>Clarityの機能は2020/1/1以降、Asset Management機能へ移行されました。</p></li>
+</ul>
+<p>AWSアカウント上に作成されたネットワークポリシーを可視化します。
+ネットワーク自体を可視化するのではなく、ポリシーを可視化する機能であることに留意してください。</p>
+<ol class="arabic simple">
+<li><p>[Asset Management] - [Clarity]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_001.png" src="../_images/dome9_8_001.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>AWSアカウントをクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_002.png" src="../_images/dome9_8_002.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>リージョンを選択します。続けてポリシーを可視化したいVPCをクリックし、[セキュリティグループ表示]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_003.png" src="../_images/dome9_8_003.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>[DMZ]のSecurity Groupをクリックします。</p></li>
+</ol>
+<p>DMZ上にSecurity Groupが存在するということは、任意のIPアドレス (0.0.0.0/0) からアクセス可能であることを意味します。
+そのSecurity Groupにどのようなリソースが関連付けられているか・どのようなポートが開放されているかを右側の詳細画面で確認できます。</p>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_004.png" src="../_images/dome9_8_004.png" />
+</div>
+<p>Security Groupへのリンクをクリックすると、詳細を表示する画面に遷移します。</p>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_005.png" src="../_images/dome9_8_005.png" />
+</div>
+<ol class="arabic simple" start="5">
+<li><p>[内部ゾーン]のSecurity Groupをクリックします。（dome9-instanceではじまるリソースを選択します）</p></li>
+</ol>
+<p>[内部ゾーン]にSecurity Groupが存在するということは、VPC内のリソースからアクセス可能であることを意味します。</p>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_006.png" src="../_images/dome9_8_006.png" />
+</div>
+<p>EC2インスタンスへのリンクをクリックすると、詳細を表示する画面に遷移します。
+特定のインスタンスの設定や関連するアラートをまとめて確認することができます（AWSのマネージメントコンソールは各サービス毎に画面が分かれています）。</p>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_007.png" src="../_images/dome9_8_007.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_008.png" src="../_images/dome9_8_008.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_009.png" src="../_images/dome9_8_009.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_010.png" src="../_images/dome9_8_010.png" />
+</div>
+<div class="figure align-center">
+<img alt="../_images/dome9_8_011.png" src="../_images/dome9_8_011.png" />
+</div>
+</div>
+<div class="section" id="security-groupip">
+<h2><span class="section-number">5.2. </span>Security Groupで利用するIPアドレスの管理<a class="headerlink" href="#security-groupip" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Dome9ではSecurity Groupで設定するIPアドレス・ネットワークアドレスをIP Listというオブジェクトとして管理することができます。
+これにより、アドレスのコンテキストを把握しやすくなります。
+また、IP Listを変更することでそのIP Listを利用して設定されたSecurity Groupを一括で変更することも可能です。</p>
+<ol class="arabic simple">
+<li><p>[ネットワークセキュリティ] - [IPリスト] - [追加]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_001.png" src="../_images/ip_1_001.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>[Name]および[説明]を入力し、[作成]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_003.png" src="../_images/ip_1_003.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>IPアドレスを入力し、[ADD]をクリックします。</p></li>
+</ol>
+<p>以下の画面では、RFCで定義されているドキュメンテーション用のネットワークアドレスを設定しています。</p>
+<div class="figure align-center">
+<img alt="../_images/ip_1_004.png" src="../_images/ip_1_004.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>IP ListにIPアドレスが追加されたことを確認し、[SAVE]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_005.png" src="../_images/ip_1_005.png" />
+</div>
+<ol class="arabic simple" start="5">
+<li><p>作成したIP Listを利用してSecurity Groupを設定します。[ネットワークセキュリティ] - [セキュリティグループ]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_006.png" src="../_images/ip_1_006.png" />
+</div>
+<ol class="arabic simple" start="6">
+<li><p>最初に作成したVPCのIDでフィルタリングし、EC2用のセキュリティグループ（Security Groupの名前に&quot;Instance&quot;を含む）をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_007.png" src="../_images/ip_1_007.png" />
+</div>
+<ol class="arabic simple" start="7">
+<li><p>さきほど作成したIP ListからSSHでアクセスすることを許可します。[+]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_008.png" src="../_images/ip_1_008.png" />
+</div>
+<ol class="arabic simple" start="8">
+<li><p>[Port Behavior]を[Limited]に変更します。併せて、[ADD SOURCE]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_009.png" src="../_images/ip_1_009.png" />
+</div>
+<ol class="arabic simple" start="9">
+<li><p>[IP List] - [（作成したIP List名）]を選択します。併せて、[Service Type]で[SSH]を選択し、[CREATE SERVICE]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_009_2.png" src="../_images/ip_1_009_2.png" />
+</div>
+<ol class="arabic simple" start="10">
+<li><p>Inbound ServiceにSSHの許可ルールが追加されていることを確認します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_010.png" src="../_images/ip_1_010.png" />
+</div>
+<ol class="arabic simple" start="11">
+<li><p>併せて、AWSのマネージメントコンソール上でも設定が追加されていることを確認します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/ip_1_011.png" src="../_images/ip_1_011.png" />
+</div>
+</div>
+<div class="section" id="dynamic-access">
+<h2><span class="section-number">5.3. </span>Dynamic Accessによる一時的なアクセス許可<a class="headerlink" href="#dynamic-access" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Dynamic Accessは、一定時間のみ特定のIPアドレスからのアクセスを許可することができる機能です。
+設定した時間を経過すると、Dome9によって許可設定が自動で削除されます。</p>
+<ol class="arabic simple">
+<li><p>[ネットワークセキュリティ] - [Dynamic Access]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dynamic_access_1_001.png" src="../_images/dynamic_access_1_001.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>最初に作成したVPCのIDでフィルタリングし、EC2インスタンスに割り当てられたSecurity GroupのSSHアクセスを許可するルールに対して[GET ACCESS]をクリックします。</p></li>
+</ol>
+<p>これで、Dome9のコンソールにアクセスししている環境からのアクセスが許可されました。
+今のネットワーク環境（グローバルIPアドレス）は以下から確認できます。</p>
+<p><a class="reference external" href="http://checkip.amazonaws.com/">http://checkip.amazonaws.com/</a></p>
+<div class="figure align-center">
+<img alt="../_images/dynamic_access_1_002.png" src="../_images/dynamic_access_1_002.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>一時的な許可が完了していることを確認します。[Active Leases]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dynamic_access_1_003.png" src="../_images/dynamic_access_1_003.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p><a class="reference external" href="http://checkip.amazonaws.com/">http://checkip.amazonaws.com/</a> で確認したIPアドレスからのアクセスが許可されていることを確認します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dynamic_access_1_004.png" src="../_images/dynamic_access_1_004.png" />
+</div>
+<ol class="arabic simple" start="5">
+<li><p>併せて、AWSのマネージメントコンソール上でも設定が追加されていることを確認します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dynamic_access_1_005.png" src="../_images/dynamic_access_1_005.png" />
+</div>
+<ol class="arabic simple" start="6">
+<li><p>次は、アクセスを許可するIPアドレスを明示的に指定します。[Custom Lease]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dynamic_access_1_006.png" src="../_images/dynamic_access_1_006.png" />
+</div>
+<ol class="arabic simple" start="7">
+<li><p>アクセスを許可するIPアドレスを入力し、[SAVE]をクリックします。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dynamic_access_1_007.png" src="../_images/dynamic_access_1_007.png" />
+</div>
+<ol class="arabic simple" start="8">
+<li><p>併せて、AWSのマネージメントコンソール上でも設定が追加されていることを確認します。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/dynamic_access_1_008.png" src="../_images/dynamic_access_1_008.png" />
+</div>
+</div>
+<div class="section" id="full-protectionsecurity-group">
+<h2><span class="section-number">5.4. </span>Full ProtectionによるSecurity Groupの保護<a class="headerlink" href="#full-protectionsecurity-group" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Full Protectionが有効なSecurity Groupは、Dome9を経由しない変更を検知するとDome9によって元の設定に戻されます。</p>
+<p>1. Security Groupの設定を確認します。[Network Security] - [Security Group]をクリックします。
+併せて、作成したVPCでフィルタリングを行います。
+今回は、[Default]で動作を確認します。
+[Default]をクリックします。</p>
+<div class="figure align-center">
+<img alt="../_images/full_protection_1_001.png" src="../_images/full_protection_1_001.png" />
+</div>
+<p>2．[FULL PROTECTION]が有効になっていることを確認します。
+有効になっていない場合には有効化します。
+併せて、現在のSeurity Groupの設定を確認します。
+[Inbound Services]では、[default]から任意のポートでアクセスできます。
+今回は、任意のIPアドレスから任意のポートにアクセスできるような変更を加え、それが検知されて元に戻ることを確認します。</p>
+<div class="figure align-center">
+<img alt="../_images/full_protection_1_002.png" src="../_images/full_protection_1_002.png" />
+</div>
+<p>3. AWSのマネージメントコンソールにログインし、VPCのコンソールを開きます。
+[セキュリティグループ]を選択し、[default]のSecurity Groupを選択します。
+[インバウンドのルール]のタブを選択し、[ルールの編集]をクリックします。</p>
+<div class="figure align-center">
+<img alt="../_images/full_protection_1_003.png" src="../_images/full_protection_1_003.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>既存のインバウンドのルールを変更し、[ルールの保存]をクリックします。</p></li>
+</ol>
+<ul class="simple">
+<li><p>ソース : カスタム, &quot;0.0.0.0/0&quot;</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../_images/full_protection_1_004.png" src="../_images/full_protection_1_004.png" />
+</div>
+<p>5. インバウンドのルールが変更されたことを確認します。
+Dome9によって設定が戻されるまでしばらく（10分～15分）待ちます。
+マネージメントコンソール上でインバウンドのルールがロールバックされたことを確認したらDome9のコンソールに戻ります。</p>
+<p>ロールバック前の状態がこちらです。</p>
+<div class="figure align-center">
+<img alt="../_images/full_protection_1_005_1.png" src="../_images/full_protection_1_005_1.png" />
+</div>
+<p>ロールバック後の状態がこちらです。</p>
+<div class="figure align-center">
+<img alt="../_images/full_protection_1_005_2.png" src="../_images/full_protection_1_005_2.png" />
+</div>
+<ol class="arabic simple" start="6">
+<li><p>操作したSeurity Groupを開き、[History]の直近のイベントを開きます。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/full_protection_1_006.png" src="../_images/full_protection_1_006.png" />
+</div>
+<ol class="arabic simple" start="7">
+<li><p>[Dome9 Audit - Security Group Tamper Detected And Handled]というメッセージがあることを確認します。これはDome9がDome9を経由しない変更を検出し設定を元に戻したことを示す記録です。</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/full_protection_1_007.png" src="../_images/full_protection_1_007.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="step04.html" class="btn btn-neutral float-right" title="6. IAM Safety" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="step02.html" class="btn btn-neutral float-left" title="4. Posture Management" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, classmethod Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
