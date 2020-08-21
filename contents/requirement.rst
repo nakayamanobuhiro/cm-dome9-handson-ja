@@ -27,9 +27,9 @@
 
     - ハンズオンの中でIAMのリソース等を作成・変更します
 
-- dome9アカウント
+- Dome9アカウント
 
-  - dome9のWebサイトからサインアップ可能
+  - Dome9のWebサイトからサインアップ可能
 
     - https://secure.dome9.com/v2/register/invite
 

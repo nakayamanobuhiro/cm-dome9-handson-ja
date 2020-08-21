@@ -8,41 +8,36 @@ Posture Managementでは、クラウドプラットフォーム上の状態・�
 ----------------------------------------
 
 最初に作成したリソースを評価します。
-今回は、[AWS Dome9 CheckUp]のRulesetを利用します。
+今回は、[AWS CloudGuard CheckUp]のRulesetを利用します。
 
 
-1. [Posture Management] - [Compliance Rulesets]を選択します。
-
+1. [POSTURE MANAGEMENT] - [Compliance Rulesets]を選択します。
 
 .. figure:: /contents/images/dome9_3_001.png
   :align: center
+  :scale: 80%
 
 
-2. [AWS Dome9 CheckUp] - [評価を実行]をクリックします。見つけられない場合にはRuleset名をフィルターのテキストボックスに入力して絞り込んでください。
-
+2. [AWS CloudGuard CheckUp] - [評価を実行]をクリックします。見つけられない場合にはRuleset名をフィルターのテキストボックスに入力して絞り込んでください。
 
 .. figure:: /contents/images/dome9_3_002.png
   :align: center
 
 
-3. 評価対象を選択し、[RUN]をクリックします。見つけられない場合にはRuleset名をフィルターのテキストボックスに入力して絞り込んでください。
+3. 評価対象を選択し、[RUN]をクリックします。
 
-- [Cloud Account]: Dome9に追加したAWSアカウント
+- [Cloud account]: Dome9に追加したAWSアカウント
 - [Region]: Tokyo（評価用のリソースを作成したリージョン）
 - [VPC]: CloudFormationで作成したVPC
-
 
 .. figure:: /contents/images/dome9_3_003.png
   :align: center
 
 
-
 4. 評価結果を確認します。
-
 
 .. figure:: /contents/images/dome9_3_004.png
   :align: center
-
 
 
 評価対象のリソースの修正
@@ -60,14 +55,11 @@ Posture Managementでは、クラウドプラットフォーム上の状態・�
 .. figure:: /contents/images/dome9_4_001.png
   :align: center
 
-
 .. figure:: /contents/images/dome9_4_002.png
   :align: center
 
-
 .. figure:: /contents/images/dome9_4_003.png
   :align: center
-
 
 .. figure:: /contents/images/dome9_4_004.png
   :align: center
@@ -80,7 +72,6 @@ Posture Managementでは、クラウドプラットフォーム上の状態・�
 
 
 評価ルールの詳細は以下のドキュメントを参照してください。
-
 
 - Instance with administrative service: SSH (TCP:22) is too exposed to the public internet
 
@@ -129,10 +120,8 @@ Security Groupの名前をクリックします。
 .. figure:: /contents/images/dome9_5_004.png
   :align: center
 
-
 .. figure:: /contents/images/dome9_5_005.png
   :align: center
-
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -164,7 +153,7 @@ AWSリソースの評価と修正は以上です。
 【参考】その他のルール
 ----------------------------------------
 
-これ以外に[AWS Dome9 CheckUp]に含まれるルールの一部を紹介します。
+これ以外に[AWS CloudGuard CheckUp]に含まれるルールの一部を紹介します。
 
 
 --------------------------------------------------------------------------------
@@ -179,7 +168,6 @@ AWSリソースの評価と修正は以上です。
 --------------------------------------------------------------------------------
 "Ensure IAM password policy expires passwords within 90 days or less"
 --------------------------------------------------------------------------------
-
 
 
 - Ensure IAM password policy expires passwords within 90 days or less
@@ -224,13 +212,14 @@ Rulesetで定義した基準を全てのリソースが準拠していること�
 Dome9ではそのようなケースを例外として登録し評価対象から除外することができます。
 
 
-1. [Posture Management] - [Assesment History]を選択します。
+1. [POSTURE MANAGEMENT] - [Assesment History]を選択します。
 
 .. figure:: /contents/images/exclude_001.png
   :align: center
+  :scale: 80%
 
 
-2．Ruleset [AWS Dome9 Checkup] で評価した最新の評価結果を開きます。
+2．Ruleset [AWS CloudGuard CheckUp] で評価した最新の評価結果を開きます。
 
 .. figure:: /contents/images/exclude_002.png
   :align: center
@@ -248,7 +237,6 @@ Dome9ではそのようなケースを例外として登録し評価対象から
 
 4. [Actions]から、旗のアイコンをクリックします。
 
-
 .. figure:: /contents/images/exclude_004.png
   :align: center
 
@@ -263,22 +251,19 @@ Dome9ではそのようなケースを例外として登録し評価対象から
 
 6. 除外するルールを選択およびコメントを入力し、[SAVE]をクリックします。
 
-
 .. figure:: /contents/images/exclude_006.png
   :align: center
 
 
 7. 除外設定が作成されたことを確認します。
-[Posture Management] - [Exclusions]を選択します。
-
+[POSTURE MANAGEMENT] - [Exclusions]を選択します。
 
 .. figure:: /contents/images/exclude_007.png
   :align: center
 
 
 8. 実際に評価から除外されたか確認します。
-[Posture Management] - [Complient Rulesets]を選択し、[AWS Dome9 Checkup]で[評価を実行]します。
-
+[POSTURE MANAGEMENT] - [Complient Rulesets]を選択し、[AWS CloudGuard CheckUp]で[評価を実行]します。
 
 .. figure:: /contents/images/exclude_008.png
   :align: center
@@ -296,5 +281,4 @@ Dome9ではそのようなケースを例外として登録し評価対象から
 
 .. figure:: /contents/images/exclude_011.png
   :align: center
-
 
