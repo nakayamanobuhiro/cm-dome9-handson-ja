@@ -51,7 +51,7 @@ Security Groupへのリンクをクリックすると、詳細を表示する画
   :align: center
 
 
-5. [Internal]]のSecurity Groupをクリックします。（dome9-instanceではじまるリソースを選択します）
+5. [Internal]のSecurity Groupをクリックします。（dome9-instanceではじまるリソースを選択します）
 
 [Internal]にSecurity Groupが存在するということは、VPC内のリソースからアクセス可能であることを意味します。
 
