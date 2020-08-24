@@ -26,7 +26,6 @@ Dome9で評価するリソースを作成します。
 .. figure:: /contents/images/dome9_1_006.png
   :align: center
 
-
 .. figure:: /contents/images/dome9_2_001.png
   :align: center
 
@@ -69,7 +68,6 @@ https://dome9-handson-cfn-template-2020-02.s3-ap-northeast-1.amazonaws.com/hands
   :align: center
 
 
-
 9. 【AWS】[リソース]のタブを選択し、作成されたVPCのIDをメモします。（評価を実行する際に利用します）
 
 .. figure:: /contents/images/dome9_2_009.png
@@ -97,10 +95,10 @@ https://secure.dome9.com/v2/register/invite
 
 https://secure.dome9.com/v2/login
 
-.. figure:: /contents/images/dome9_1_001.png
+.. figure:: /contents/images/dome9_1_001_1.png
   :align: center
 
-.. figure:: /contents/images/dome9_1_001_1.png
+.. figure:: /contents/images/dome9_1_001_2.png
   :align: center
 
 
@@ -134,12 +132,10 @@ https://secure.dome9.com/v2/login
   :align: center
 
 
-
 7. 【AWS】[サービス]をクリックし、[IAM]を選択します。 
 
 .. figure:: /contents/images/dome9_1_007.png
   :align: center
-
 
 
 8. 【AWS】[ポリシー]を選択し、[ポリシーを作成]ボタンをクリックします。 
@@ -148,13 +144,10 @@ https://secure.dome9.com/v2/login
   :align: center
 
 
-
 9. 【AWS】[JSON]タブを選択します。 
-
 
 .. figure:: /contents/images/dome9_1_009.png
   :align: center
-
 
 
 10. 【Dome9】ポリシーをコピーし、ペーストします。
@@ -167,17 +160,13 @@ https://secure.dome9.com/v2/login
   :align: center
 
 
-
-
 11. 【AWS】[ポリシーの確認]をクリックします。
 
 .. figure:: /contents/images/dome9_1_011.png
   :align: center
 
 
-
-
-12. 【AWS】ポリシーに[dome9-readonly-policy]という名前をつけ、[ポリシーの作成]をクリックします。 
+12. 【AWS】ポリシーに[CloudGuard-readonly-policy]という名前をつけ、[ポリシーの作成]をクリックします。 
 
 .. figure:: /contents/images/dome9_1_012.png
   :align: center
@@ -189,15 +178,13 @@ https://secure.dome9.com/v2/login
   :align: center
 
 
-
 14. 【AWS】[JSON]タブを選択します。 
 
 .. figure:: /contents/images/dome9_1_009.png
   :align: center
 
 
-15. 【Dome9】ポリシーをコピーし、ペーストします。 コピー  
-
+15. 【Dome9】ポリシーをコピーし、ペーストします。 
 
 .. figure:: /contents/images/dome9_1_015_1.png
   :align: center
@@ -209,7 +196,7 @@ https://secure.dome9.com/v2/login
   :align: center
 
 
-16. 【AWS】ポリシーに[dome9-write-policy]という名前をつけ、[ポリシーの作成]をクリックします。 
+16. 【AWS】ポリシーに[CloudGuard-write-policy]という名前をつけ、[ポリシーの作成]をクリックします。 
 
 .. figure:: /contents/images/dome9_1_016.png
   :align: center
@@ -222,8 +209,6 @@ https://secure.dome9.com/v2/login
 
 .. figure:: /contents/images/dome9_1_018.png
   :align: center
-
-
 
 
 19. 【AWS/Dome9】ロールタイプを選択し、[別のAWS アカウント]をクリックます。併せて、[外部IDが必要]のチェックボックスにチェックします。以下の値を入力します。[次のステップ:アクセス権限]をクリックします。
@@ -239,13 +224,12 @@ https://secure.dome9.com/v2/login
   :align: center
 
 
-
 20. 【AWS】以下のポリシーを選択し、[次のステップ:タグ]をクリックします。
 
 - [SecurityAudit] (AWS管理ポリシー)
 - [AmazonInspectorReadOnlyAccess] (AWS管理ポリシー)
-- [dome9-readonly-policy] (フィルタで「dome9」と検索します。)
-- [dome9-write-policy]
+- [CloudGuard-readonly-policy] (フィルタで「cloudguard」と検索します。)
+- [CloudGuard-write-policy]
 
 .. figure:: /contents/images/dome9_1_020.png
   :align: center
@@ -254,8 +238,7 @@ https://secure.dome9.com/v2/login
 21. 【AWS】[次のステップ:確認]をクリックします。
 
 
-
-22. 【AWS】ロール名に[Dome9-Connect]という名前を付け、［ロールの作成］をクリックします。
+22. 【AWS】ロール名に[CloudGuard-Connect]という名前を付け、［ロールの作成］をクリックします。
 
 .. figure:: /contents/images/dome9_1_022.png
   :align: center
@@ -267,7 +250,6 @@ https://secure.dome9.com/v2/login
   :align: center
 
 
-
 24. 【AWS/Dome9】ロールARNをコピーし、右の[ロールARN]フィールドにペーストします。
 
 .. figure:: /contents/images/dome9_1_024_1.png
@@ -275,7 +257,8 @@ https://secure.dome9.com/v2/login
 
 .. figure:: /contents/images/dome9_1_024_2.png
   :align: center
-
+  :scale: 80%
+  
 
 25. 【Dome9】[NEXT]をクリックします。 
 
@@ -289,10 +272,5 @@ https://secure.dome9.com/v2/login
   :align: center
 
 
-
 AWSアカウントの追加は以上です。
-
-
-
-
 

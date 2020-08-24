@@ -22,6 +22,8 @@ Dome9には上記の機能以外に以下のような機能を提供していま
 
   - IAM Report
 
+- Serverless
+
 
 Asset Management
 ----------------------------------------
@@ -32,6 +34,7 @@ Azure / GCP / Kubernetes
 
 AWS以外にも、Azure / GCP / k8sもDome9で保護することができます。
 ただし、利用できる機能はクラウドサービスによって異なります。
+
 
 Posture Management
 ----------------------------------------
@@ -44,6 +47,7 @@ Compliance Rulesetでリスクがあると評価されたリソースに対し�
 
 https://dev.classmethod.jp/etc/dome9-remediation/
 
+
 ----------------------------------------
 Compliance Policies
 ----------------------------------------
@@ -54,6 +58,7 @@ Compliance Policies
 https://dev.classmethod.jp/cloud/dome9-continuous-compliance/
 
 この継続的な評価は特定のクラウドサービスのアカウントに対して実行することもできますし、アカウントをグループ化したOrganization Unitの単位で適用することも可能です。
+
 
 Network Security
 ----------------------------------------
@@ -76,6 +81,7 @@ Log.icはCheckpointの提供する脅威インテリジェンスを連携し、�
 
 https://dev.classmethod.jp/cloud/aws/dome9-log-ic-introduction/
 
+
 IAM Protection
 ----------------------------------------
 
@@ -87,3 +93,12 @@ IAM UserやIAM Roleに対して付与されている権限の分析や認証情�
 IAM Reportを利用することで、特定のアクションが許可されたIAMのEntityを特定したり、不適切な認証設定のIAM Entityを特定することが可能です。
 
 https://dev.classmethod.jp/cloud/aws/dome9-iam-report/
+
+
+Serverless
+----------------------------------------
+
+Lambda関数のリスク評価とランタイム保護を行うことができます。
+リスク評価は脆弱性、不要なIAM権限、パスワードやキーなどの機密情報について、Lambda関数とその依存ライブラリをスキャンして分析し、問題を検出することが可能です。
+ランタイム保護は、異常動作がないかLambda関数の動作を監視し、悪意のあるソースからの入力に対しワークロードファイアウォールとして機能します。
+悪意のある入力または攻撃を検知までに留めたり、ブロックすることも可能です。
